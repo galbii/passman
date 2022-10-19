@@ -1,51 +1,32 @@
-from cryptography.fernet import Fernet 
+import pandas as pd
 class PassMan():
     
-    """Try to make it so that if you are loading this module for the first time in a folder:
-        make initial init use try except
-        try: searching for key file
-        except(if no file found): generate a key
-        read the key into a class variable self.key"""
-    """Other Notes: """
+    """Initial Init to create a passman object. Creates the password file and stores it in self.password_file. Self.key will be"""
     def __init__(self):
         self.password_file = "passwords"
-        self.path = ""
-        self.f = None
-        self.key = None
-        #self.generateKey(self, path)
-        #might want to put this here
-
-    def init_fernet(self, key):
-        print('success')
-        self.f = Fernet(key)
-
-    def generateKey(self, path):
-        self.path = path
-        key = fn.generate_key()
-        file = open(path, 'wb')
-        file.write(key)
-        file.close()
-
-    def importKey(self):
         try:
-            print(self.path)
-            file = open(self.path, 'rb')
-            self.key = file.read()
-            self.init_fernet(self.key)
-            file.close()
+            self.passtable = pd.read_csv(self.password_file, index_col = 0)
         except:
-            print("error: public key path not defined.")
+            self.passtable = pd.DataFrame(data = None, columns = ['Login', 'Password'])
+        self.path = "public_key"
+        self.key = None
 
-    def setPath(self, path):
-        self.path = path
-        print(self.path)
-
-    """Creates an entry and appended it to the json file specified. If not password JSON file present, then the program will call init_json to create it."""
+    def save_db(self, df):
+        df.to_csv(self.password_file)
+        print('success')
+    
     def add_entry(self, website, login, password):
-        with(open(self.password_file, 'wb')):
-            epass = self.f.encrypt(password)
-            elogin = self.f.encrypt(login)
-            encrypted = {website: {elogin: epass}}
-            file.write(enecrypted)
-            print(encrypted)
-            file.close()
+        epass = password
+        elog = login
+        df = self.passtable
+        df.loc[website] = [login, password]
+#        try:
+#            print(df.loc[website])
+#        except:
+#            df.loc[website] = [login, password]
+#        else:
+#            if df.loc[website] == [login, password]:
+#                df.loc[website+'1'] = [login, password]
+#            else:
+#                df.loc[website] = [login, password]
+        self.save_db(df)
