@@ -6,5 +6,5 @@ key_path = 'public_key'
 
 if __name__ == "__main__":
     pm = pm()
-    pm.add_entry('tithub', 'xgalbii', 'random password')
+    pm.add_entry('tithub', 'hh', 'random password')
 
