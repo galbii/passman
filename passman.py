@@ -54,4 +54,10 @@ class PassMan():
 #                df.loc[website] = [login, password]
 #        except:
 #            df.loc[website] = [login, password]
+        self.passtable = df
         self.save_db(df)
+
+    def del_entry(self, website):
+       self.passtable.drop(website, axis = "index", inplace = True) 
+       self.save_db(self.passtable)
+       print("success")

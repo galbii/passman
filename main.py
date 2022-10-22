@@ -6,5 +6,7 @@ key_path = 'public_key'
 
 if __name__ == "__main__":
     pm = pm()
-    pm.add_entry('tithub', 'hh', 'random password')
+    pm.add_entry('', 'hh', 'random password')
+    pm.del_entry('tithub')
+    print(pm.passtable)
 
