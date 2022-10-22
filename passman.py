@@ -17,6 +17,7 @@ class PassMan():
         print('success')
     
     #def inc_dig(dig):
+    """edit this function to manually check if an entry is correct see test.py to see the test results i.e. df.loc['ya', 'hii'] == entry['hii'] food for thought, assign df.loc[certain_entry] to a variable and then do comparisons with single row values"""
     def check_entry(self, web, entry, mode : Optional[str]="unmatch"):
         if web in self.passtable.index:
             print('bitch')
@@ -31,6 +32,8 @@ class PassMan():
         else:
             return False
         
+        """gonna make it so that only one single instance of the website will
+        be accomodated for"""
     def add_entry(self, website, login, password):
         entry = [login, password]
         df = self.passtable
@@ -61,3 +64,7 @@ class PassMan():
        self.passtable.drop(website, axis = "index", inplace = True) 
        self.save_db(self.passtable)
        print("success")
+
+    """workign on a clear table entry to delete the entire dataframe"""
+    def clear_table(self):
+        
